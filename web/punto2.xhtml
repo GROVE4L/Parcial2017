@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>PUNTO 2 - PARCIAL 2017</title>
+    </h:head>
+    <h:body>
+        <p:panel header="PUNTO 2">
+            
+            <h:form><p:commandButton value="VOLVER AL MENU PRINCIPAL" action="index"/></h:form>
+            <h:form id="formularioP2">
+                <p:growl id="mensajes"/>
+                <p:panelGrid columns="2" styleClass="ui-noborder">
+                    <p:outputLabel value="Seleccione tipo de figura"/> 
+                    <p:selectOneMenu value="#{punto2FormBean.figuraElegida}" >
+                        <f:selectItem itemLabel="Triangulo Equilatero" itemValue="1" />
+                        <f:selectItem itemLabel="Cuadrado" itemValue="2" />
+                        <f:selectItem itemLabel="Pentagono" itemValue="3" />
+                    </p:selectOneMenu>
+                    
+                    <p:outputLabel value="Valor de un lado" for="inLado"/> 
+                    <p:inputNumber id="inLado" required="true" decimalPlaces="2" size="2" value="#{punto2FormBean.ladoIngresado}">
+                        <f:validateDoubleRange minimum="1" maximum="50"/>
+                    </p:inputNumber>
+                    <p:commandButton value="Cargar" actionListener="#{punto2FormBean.agregarFigura()}" update="formularioP2 :formularioLista" />                    
+                </p:panelGrid>
+            </h:form>
+            <h:form><p:commandButton value="Vaciar Lista" actionListener="#{punto2FormBean.vaciarLista()}" update=":formularioLista" /></h:form>
+            <h:form id="formularioLista">
+                <p:panelGrid columns="2" styleClass="ui-noborder">
+                    <p:dataTable value="#{punto2FormBean.listadoFiguras.listaFiguras}" var="f">
+                        <p:column headerText="Tipo">
+                            <h:outputText value="#{f.obtenerNombre()}" />
+                        </p:column>
+                        <p:column headerText="Perimetro">
+                            <h:outputText value="#{f.calcularPerimetro()}" />
+                        </p:column>
+                    </p:dataTable>                    
+                </p:panelGrid>
+            </h:form>
+        </p:panel>            
+    </h:body>
+</html>
+

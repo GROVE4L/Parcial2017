@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>PUNTO 1 - PARCIAL 2017</title>
+    </h:head>
+    <h:body>
+        <p:panel header="PUNTO 1">
+            
+            <h:form><p:commandButton value="VOLVER AL MENU PRINCIPAL" action="index"/></h:form>
+            <h:form id="formularioP1">
+                <p:growl id="mensajes"/>
+                <p:panelGrid columns="2" styleClass="ui-noborder">
+                    <p:outputLabel value="Ingrese rango inferior" for="inNumeroMenor"/> 
+                    <p:inputNumber id="inNumeroMenor" required="true" decimalPlaces="0" size="2" value="#{punto1FormBean.rangoMenor}">
+                        <f:validateLongRange minimum="0" maximum="500"/>
+                    </p:inputNumber>                    
+                    <p:outputLabel value="Ingrese rango superior" for="inNumeroMayor"/> 
+                    <p:inputNumber id="inNumeroMayor" required="true" decimalPlaces="0" size="2" value="#{punto1FormBean.rangoMayor}">
+                        <f:validateLongRange minimum="0" maximum="500"/>
+                    </p:inputNumber>
+                    <p:commandButton value="Mostrar" actionListener="#{punto1FormBean.actualizarlistas()}" update="formularioP1 :formularioLista" />                        
+                </p:panelGrid>
+            </h:form>
+            <h:form id="formularioLista">
+                <p:panelGrid columns="2" styleClass="ui-noborder">
+                    <p:dataList value="#{punto1FormBean.listaPares}" var="num">
+                        <f:facet name="header">
+                            PARES
+                        </f:facet>
+                        #{num}
+                    </p:dataList>
+                    <p:dataList value="#{punto1FormBean.listaImpares}" var="num">
+                        <f:facet name="header">
+                            IMPARES
+                        </f:facet>
+                        #{num}
+                    </p:dataList>
+                </p:panelGrid>
+            </h:form>
+        </p:panel>            
+    </h:body>
+</html>
+
