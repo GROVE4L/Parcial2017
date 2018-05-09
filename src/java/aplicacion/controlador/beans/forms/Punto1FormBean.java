@@ -66,6 +66,11 @@ public class Punto1FormBean implements Serializable{
                             "El rango ["+this.rangoMenor+";"+this.rangoMayor+"] es incorrecto."));
         }
         else {
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            facesContext.addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO,
+                            "El rango ["+this.rangoMenor+";"+this.rangoMayor+"] es CORRECTO.",
+                            "El rango ["+this.rangoMenor+";"+this.rangoMayor+"] es CORRECTO."));
             this.reiniciarListas();
             for(int i=this.rangoMenor; i<=this.rangoMayor; i++){
                 if(i % 2 == 0) {
